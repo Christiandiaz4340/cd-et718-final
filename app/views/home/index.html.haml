@@ -1,0 +1,97 @@
+/ Page Container
+.w3-content.w3-margin-top{:style => "max-width:1400px;"}
+  / The Grid
+  .w3-row-padding
+    / Left Column
+    .w3-third
+      .w3-white.w3-text-grey.w3-card-4
+        .w3-display-container
+          = image_tag 'avatar_hat.jpg', alt: 'Avatar', style: "width:100%"
+          .w3-display-bottomleft.w3-container.w3-text-black
+            %h2= @user.full_name
+        .w3-container
+          %p
+            %i.fa.fa-briefcase.fa-fw.w3-margin-right.w3-large.w3-text-teal>
+            = @user.job
+          %p
+            %i.fa.fa-home.fa-fw.w3-margin-right.w3-large.w3-text-teal>
+            = @user.location
+          %p
+            %i.fa.fa-envelope.fa-fw.w3-margin-right.w3-large.w3-text-teal>
+            = @user.email
+          %p
+            %i.fa.fa-phone.fa-fw.w3-margin-right.w3-large.w3-text-teal>
+            = @user.phone_number
+          %hr/
+          %p.w3-large
+            %b
+              %i.fa.fa-asterisk.fa-fw.w3-margin-right.w3-text-teal>
+              Skills
+          - @user.skills.each do |skill|
+            %p= skill.title
+            .w3-light-grey.w3-round-xlarge.w3-small
+              .w3-container.w3-center.w3-round-xlarge.w3-teal{:style => "width: #{skill.level}%"} #{skill.level}%
+
+          %p.w3-large.w3-text-theme
+            %b
+              %i.fa.fa-globe.fa-fw.w3-margin-right.w3-text-teal>
+              Languages
+          - @user.languages.each do |language|
+            %p= language.name
+            .w3-light-grey.w3-round-xlarge
+              .w3-round-xlarge.w3-teal{:style => "height:24px;width:#{language.level}%"}
+          %br/
+      %br/
+      / End Left Column
+    / Right Column
+    .w3-twothird
+      .w3-container.w3-card.w3-white.w3-margin-bottom
+        %h2.w3-text-grey.w3-padding-16
+          %i.fa.fa-suitcase.fa-fw.w3-margin-right.w3-xxlarge.w3-text-teal>
+          Work Experience
+        - @user.experiences.order({from: :desc}).each do |experience|
+          .w3-container
+            %h5.w3-opacity
+              %b= experience.position
+            %h6.w3-text-teal
+              %i.fa.fa-calendar.fa-fw.w3-margin-right>
+              = experience.from.strftime("%b %Y")
+              \-
+              - if experience.to.blank? 
+                %span.w3-tag.w3-teal.w3-round Current
+              - else
+                = experience.to.strftime("%b %Y")
+            %p= experience.note
+            %hr/
+
+      .w3-container.w3-card.w3-white
+        %h2.w3-text-grey.w3-padding-16
+          %i.fa.fa-certificate.fa-fw.w3-margin-right.w3-xxlarge.w3-text-teal>
+          Education
+        .w3-container
+          %h5.w3-opacity
+            %b W3Schools.com
+          %h6.w3-text-teal
+            %i.fa.fa-calendar.fa-fw.w3-margin-right>
+            Forever
+          %p Web Development! All I need to know in one place
+          %hr/
+        .w3-container
+          %h5.w3-opacity
+            %b London Business School
+          %h6.w3-text-teal
+            %i.fa.fa-calendar.fa-fw.w3-margin-right>
+            2013 - 2015
+          %p Master Degree
+          %hr/
+        .w3-container
+          %h5.w3-opacity
+            %b School of Coding
+          %h6.w3-text-teal
+            %i.fa.fa-calendar.fa-fw.w3-margin-right>
+            2010 - 2013
+          %p Bachelor Degree
+          %br/
+      / End Right Column
+    / End Grid
+  / End Page Container
